@@ -1,0 +1,31 @@
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Logs and build artifacts
+*.log
+*.tmp
+dist/
+build/
+out/
+target/
+
+# Local configuration
+.env
+.env.*
+!.env.example
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.user
+
+# Node (used under .opencode tooling)
+node_modules/
