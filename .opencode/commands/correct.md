@@ -1,10 +1,10 @@
 ---
-description: Transform a raw, imperfect user request into a clear, structured, verifiable engineering request before the engineering workflow begins, and decide whether it is ready for a workflow.
+description: Correct and normalize an unclear, incomplete, ambiguous, contradictory, or poorly structured user request into a clear, structured, implementation-ready engineering prompt before starting an engineering workflow. Invoke the prompt-corrector agent to determine intent, extract requirements, mark clarification gaps and assumptions, and assess readiness.
 ---
 
 You are running the `correct` command of the AI Software Engineer framework.
 
-First, read and follow AGENTS.md, including its core principles and `rules/core.md`. Do not assume a specific technology stack; inspect the actual project. You are read-only: you must NOT modify application or framework files.
+First, read and follow AGENTS.md, including its core principles and `rules/core.md`. This command is read-only: you must NOT modify files or implement anything. The Prompt Corrector is a recommended pre-workflow gateway, not a mandatory lifecycle step and not an implementation agent.
 
 # Task
 
@@ -12,38 +12,37 @@ Correct the following user request:
 
 $ARGUMENTS
 
+Expected usage: `/correct <user request>`
+
 # Responsibilities
 
-- Determine the user's actual intent and classify the request into a request type and a candidate existing workflow.
-- Extract explicit functional and non-functional requirements as stated by the user.
-- Inspect the relevant repository context read-only to establish constraints already known from the project. Tag verified findings REPOSITORY FACT with a file/line reference; never assume.
-- Label every claim with an evidence status: USER REQUIREMENT, REPOSITORY FACT, CONFIRMED FACT, INFERRED ASSUMPTION, UNKNOWN, or REQUIRES RESEARCH.
-- Detect ambiguity, missing critical information, contradictions, and scope problems. Never convert an assumption into a fact and never silently resolve contradictions.
-- Generate minimal, targeted clarification questions when blocking uncertainty remains; distinguish blocking questions from optional questions and avoid asking what the repository already answers.
-- Propose measurable acceptance criteria where possible, marked as proposals pending user confirmation.
-- Identify risks and dependencies.
-- Decide whether the request is READY_FOR_WORKFLOW, NEEDS_CLARIFICATION, or INVALID_REQUEST.
-- If ready, recommend the specific existing workflow to use and why.
+- Invoke the `prompt-corrector` agent (and the `prompt-corrector` skill methodology) to process the request.
+- Determine the user's original intent and the actual requested outcome. Preserve the intent rather than expanding scope.
+- Extract explicit requirements and separate them from assumptions.
+- Detect ambiguity, missing requirements, contradictions, and unrealistic assumptions.
+- Identify users and actors, functional and non-functional requirements, integrations, data requirements, security considerations, reporting and audit requirements, acceptance criteria, and stated technical and business constraints.
+- Mark missing information as `[CLARIFICATION REQUIRED]` and unconfirmed inferences as `[ASSUMPTION — REQUIRES CONFIRMATION]`.
+- Assess implementation readiness and classify the request as READY, READY WITH ASSUMPTIONS, or NEEDS CLARIFICATION.
 
 # Tools, skills, and references
 
 - Delegate the correction to the `prompt-corrector` agent.
-- Use the `prompt-corrector` skill for the correction method and the `requirements-analysis` skill for requirement-gathering detail.
+- Use the `prompt-corrector` skill for the methodology and the `requirements-analysis` skill for requirement-gathering detail.
 - Use `templates/corrected-prompt.md` to structure the output.
-- Use the `explore` agent or direct file reads to gather repository facts; do not assume project behavior.
+- Use the `explore` agent or direct reads to confirm project context when needed; do not assume project behavior.
 
 # Constraints
 
-- Do not modify application source code or framework files.
-- Do not start an engineering workflow while the request is NEEDS_CLARIFICATION or INVALID_REQUEST.
+- Do not modify files or implement anything.
+- Do not make final architecture decisions or choose technologies without evidence.
 - Do not invent requirements, technologies, APIs, libraries, or project behavior.
+- Do not pretend missing information is known; mark it as `[CLARIFICATION REQUIRED]`.
+- Do not proceed to implementation; the command ends with the corrected prompt and readiness assessment.
 - Do not expose secrets or credentials discovered during correction.
-- Prefer evidence over assumptions; clearly flag inferences as such.
 
 # Output
 
 Report:
-1. Request status (READY_FOR_WORKFLOW, NEEDS_CLARIFICATION, or INVALID_REQUEST) and request type.
-2. The corrected engineering prompt following `templates/corrected-prompt.md` (intent, objective, project context, explicit requirements, evidence table, constraints, assumptions, unknowns, ambiguities, contradictions, dependencies, risks, out of scope, proposed acceptance criteria).
-3. Clarification questions grouped into blocking and optional, or confirmation that none are required.
-4. The recommended existing workflow when the request is READY_FOR_WORKFLOW.
+1. The corrected engineering prompt following `templates/corrected-prompt.md` (original request, intent, desired outcome, context, users/actors, explicit requirements, functional and non-functional requirements, business rules, data requirements, integrations, security requirements, reporting/audit requirements, technical constraints, assumptions, clarifications required, out of scope, acceptance criteria).
+2. The implementation readiness assessment: READY, READY WITH ASSUMPTIONS, or NEEDS CLARIFICATION.
+3. The final corrected prompt suitable for the engineering framework.

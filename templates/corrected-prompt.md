@@ -1,105 +1,85 @@
-# Corrected Engineering Prompt — <SLUG>
+# Corrected Engineering Prompt
 
-## Request Status
+Use this template for the output of the Prompt Corrector (`/correct`). Mark
+missing or ambiguous information with `[CLARIFICATION REQUIRED]` and
+unconfirmed inferences with `[ASSUMPTION — REQUIRES CONFIRMATION]`.
 
-- READY_FOR_WORKFLOW | NEEDS_CLARIFICATION | INVALID_REQUEST
+## Original Request
 
-## Request Type
+[Original user request]
 
-- <new-project | feature-development | bug-fix | refactoring | database-change | api-change | security-review | deployment | research | documentation | other>
+## Intent
 
-## User Intent
+[Clearly understood objective]
 
-<The underlying goal or problem in the user's own framing.>
+## Desired Outcome
 
-## Objective
+[Expected result]
 
-<A single, unambiguous statement of the intended outcome.>
+## Context
 
-## Project Context
+[Business/project/system context]
 
-<Verified repository facts only. Each fact is tagged REPOSITORY FACT and cites the file or line it was observed in. Do not include assumptions here.>
+## Users / Actors
 
-- <Fact> — <file reference>
-- <Fact> — <file reference>
+[List]
 
 ## Explicit Requirements
 
-### Functional
+[List]
 
-- FR-01: <Requirement as stated by the user>
+## Functional Requirements
 
-### Non-functional
+[List]
 
-- NFR-01: <Requirement> — <target or metric>
+## Non-Functional Requirements
 
-## Evidence Table
+[List]
 
-| Claim | Source | Status |
-| --- | --- | --- |
-| <Claim> | <user statement / file reference / official source / inference> | USER REQUIREMENT / REPOSITORY FACT / CONFIRMED FACT / INFERRED ASSUMPTION / UNKNOWN / REQUIRES RESEARCH |
+## Business Rules
 
-## Constraints
+[List]
 
-- <Constraint: technical, organizational, regulatory, or temporal>
+## Data Requirements
+
+[List]
+
+## Integrations
+
+[List]
+
+## Security Requirements
+
+[List]
+
+## Reporting / Audit Requirements
+
+[List]
+
+## Technical Constraints
+
+[List]
 
 ## Assumptions
 
-<Unconfirmed inferences only. Each is tagged INFERRED ASSUMPTION and states what would confirm or invalidate it. Assumptions must not be treated as requirements.>
+[List]
 
-- <Assumption> — <what confirms or invalidates>
+## Clarifications Required
 
-## Unknowns
-
-### Blocking
-
-- <Unknown> — <question that resolves it>
-
-### Non-blocking
-
-- <Unknown> — <defer to research or a later phase>
-
-## Ambiguities
-
-- <Ambiguous term or scope> — <interpretations>
-
-## Contradictions
-
-- <Conflict> — <options for the user to adjudicate>
-
-## Dependencies
-
-- <Dependency: system, library, data, or team>
-
-## Risks
-
-- <Risk> — <suggested mitigation>
+[List]
 
 ## Out of Scope
 
-- <Explicit non-goal>
+[List]
 
 ## Acceptance Criteria
 
-<Proposed, observable, testable conditions. Mark as proposals pending user confirmation; never invent requirements.>
+[List]
 
-- [ ] <Criterion 1>
-- [ ] <Criterion 2>
+## Implementation Readiness
 
-## Clarification Questions
+`READY | READY WITH ASSUMPTIONS | NEEDS CLARIFICATION`
 
-### Blocking
+## Corrected Prompt
 
-- <Question required before the request can enter a workflow>
-
-### Optional
-
-- <Question> — <default if unanswered>
-
-## Recommended Workflow
-
-- <workflows/<file>.md> — <reasoning>
-
-## Corrected Engineering Prompt
-
-<Normative, self-contained prompt for the recommended workflow and its agents. Preserve the user's original intent while using the structured sections above.>
+[Final implementation-ready prompt]

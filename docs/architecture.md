@@ -142,6 +142,27 @@ framework workflows through OpenCode project commands located under
 `build`, `test`, `review`, `security`, `debug`, `document`), and connects user
 requests to the appropriate agents, skills, rules, workflows, and templates.
 
+## Prompt Corrector (pre-workflow gateway)
+
+The Prompt Corrector is a recommended pre-workflow gateway, not a lifecycle
+stage and not part of workflow execution. It transforms an unclear,
+incomplete, ambiguous, contradictory, or poorly structured user request into a
+clear, structured, implementation-ready engineering prompt before the normal
+framework lifecycle (REQUIREMENTS through COMPLETE) begins.
+
+- It is read-only and separate from the implementation, architecture, review,
+  research, and documentation agents.
+- Its methodology (`.opencode/skills/prompt-corrector/SKILL.md`) is
+  provider-independent; only its OpenCode integration lives in `.opencode/`.
+- It classifies the corrected prompt as READY, READY WITH ASSUMPTIONS, or
+  NEEDS CLARIFICATION and never proceeds to implementation itself.
+- It is recommended, not mandatory: well-specified requests may still enter a
+  workflow directly through the normal entry points; `correct` improves the
+  request before they do.
+- The corrected prompt is an input to the workflow's requirement phase; the
+  workflow keeps its own agents, gates, and approval points.
+- See `docs/prompt-corrector.md` for the capability description.
+
 ## Documentation Layer (`docs/`, `README.md`, `CONTRIBUTING.md`, `LICENSE`)
 
 The documentation layer explains the framework and governs contributions to

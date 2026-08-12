@@ -17,10 +17,14 @@ and non-functional requirements, acceptance criteria, constraints, assumptions,
 and ambiguity detection before design or implementation begins.
 
 ### prompt-corrector
-Used to transform a raw, imperfect user request into a clear, structured,
-verifiable engineering request before an engineering workflow begins: request
-classification, intent extraction, evidence labeling, ambiguity, contradiction
-and scope detection, clarification, and readiness decisions.
+Used to transform an unclear, incomplete, ambiguous, contradictory, or poorly
+structured user request into a clear, structured, implementation-ready
+engineering prompt before an engineering workflow begins. The methodology
+covers intent determination, requirement extraction, missing-requirement
+identification, ambiguity, contradiction and assumption detection,
+clarification, acceptance criteria, and readiness assessment.
+
+**Authoritative definition:** .opencode/skills/prompt-corrector/SKILL.md
 
 ### system-architecture
 Used when designing or reviewing a system's high-level structure: architecture

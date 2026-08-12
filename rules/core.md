@@ -10,8 +10,9 @@ Fundamental constraints that apply to every task.
 
 ## Ready Before Workflow
 
-- Do not start an engineering workflow until the request is READY_FOR_WORKFLOW
-  or any blocking clarification is resolved.
+- Do not start an engineering workflow until the request is READY or
+  READY WITH ASSUMPTIONS (with the tagged assumptions confirmed), or until any
+  blocking NEEDS CLARIFICATION questions are resolved.
 - A request that needs clarification must be corrected and confirmed before
   proceeding into the workflow.
 

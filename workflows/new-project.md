@@ -20,7 +20,8 @@ Do not use for changes to an existing project; use `feature-development.md`,
 
 - The project goal and business intent have been stated.
 - The request has passed the Prompt Corrector gate (`correct` command): it is
-  READY_FOR_WORKFLOW or any blocking clarification is resolved.
+  READY or READY WITH ASSUMPTIONS, or any blocking NEEDS CLARIFICATION
+  questions are resolved.
 - Stakeholders or the requesting user are available for clarification.
 - Writing an implementation plan may precede coding.
 - No assumption of an existing codebase, framework, or language is made unless
@@ -38,7 +39,7 @@ TEST → REVIEW → SECURITY REVIEW → DOCUMENT → COMPLETE`.
    acceptance criteria. Follow the `requirements-analysis` skill and
    `rules/core.md`. Ask for missing critical information before proceeding.
    If the request has not already been corrected, run the `correct` command
-   first; do not proceed while the request is NEEDS_CLARIFICATION.
+   first; do not proceed while the request is NEEDS CLARIFICATION.
    **Gate G1:** requirements and acceptance criteria are recorded and
    unambiguous.
 2. **Research open questions** — **Research agent.**

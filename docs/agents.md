@@ -32,16 +32,16 @@ Permission settings are defined in each authoritative agent file.
 
 ### prompt-corrector
 
-Transforms an imperfect user request into a clear, structured, verifiable
-engineering request before the engineering workflow begins. Classifies the
-request, determines intent, extracts requirements, labels evidence, detects
-ambiguity, missing information, contradictions, and scope problems, generates
-clarification questions, and decides whether the request is ready for a
-workflow.
+Transforms an unclear, incomplete, ambiguous, contradictory, or poorly
+structured user request into a clear, structured, implementation-ready
+engineering prompt before the engineering workflow begins. Determines intent,
+extracts explicit requirements, marks missing information and unconfirmed
+assumptions, identifies users, constraints, and acceptance criteria, and
+assesses readiness.
 
-**Typical use:** Normalizing a raw user request, detecting missing or
-contradictory information, generating targeted clarification questions, and
-gating entry to an engineering workflow.
+**Typical use:** Running `/correct` before a workflow, normalizing a raw user
+request, surfacing missing or ambiguous information, and classifying the
+request as READY, READY WITH ASSUMPTIONS, or NEEDS CLARIFICATION.
 
 **Authoritative definition:** .opencode/agents/prompt-corrector.md
 

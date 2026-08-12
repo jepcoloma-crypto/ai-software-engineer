@@ -1,20 +1,22 @@
 # Prompt Corrector
 
-This document describes the Prompt Corrector, the framework's front-of-pipeline
-gateway that transforms an imperfect user request into a clear, structured,
-verifiable engineering request before the existing engineering workflows begin.
+This document describes the Prompt Corrector, the framework's recommended
+pre-workflow gateway that transforms an unclear, incomplete, ambiguous,
+contradictory, or poorly structured user request into a clear, structured,
+implementation-ready engineering prompt before the normal framework lifecycle
+begins.
 
 ## Position
 
 The Prompt Corrector sits between the raw user request and the existing
-framework lifecycle:
+framework lifecycle, separate from the core lifecycle itself:
 
 ```
 USER REQUEST
     ↓
 PROMPT CORRECTOR   (agent + correct command + prompt-corrector skill)
     ↓
-Corrected / Clarified Prompt   (templates/corrected-prompt.md)
+Corrected Prompt   (templates/corrected-prompt.md)
     ↓
 Existing Workflow   (REQUIREMENTS → RESEARCH → ANALYSIS → ARCHITECTURE →
                      PLAN → IMPLEMENT → TEST → REVIEW → SECURITY REVIEW →
@@ -23,81 +25,73 @@ Existing Workflow   (REQUIREMENTS → RESEARCH → ANALYSIS → ARCHITECTURE →
 Prompt Loop Engineering   (separate future phase, not implemented)
 ```
 
-The corrector is a **recommended gateway**, not a mandatory lifecycle stage.
-It is not a coding agent: it does not implement, design, research, or review
-application work, and it does not replace any of the existing agents. It
-prepares the request so that the correct existing workflow can begin.
+The corrector is a **recommended pre-workflow gateway**, not a mandatory first
+step. It is read-only and does not implement, design, research, or review
+application work, and it does not replace any of the existing agents. Its
+methodology is provider-independent; only its OpenCode integration lives in
+`.opencode/`.
 
-## Output states
+## Readiness assessment
 
-- **READY_FOR_WORKFLOW** — the readiness gate is satisfied; the corrector emits
-  a corrected engineering prompt and recommends an existing workflow.
-- **NEEDS_CLARIFICATION** — blocking uncertainty remains; the corrector emits
-  minimal, targeted questions and does not start engineering work.
-- **INVALID_REQUEST** — the request is not engineering work, is vacuous, or is
-  safety-incompatible; the corrector stops without reinterpreting it silently.
+The corrector classifies the corrected prompt as:
 
-`REQUIRES_RESEARCH` is a non-blocking annotation: a request can be
-READY_FOR_WORKFLOW with an evidence gap deferred to the RESEARCH step.
+- **READY** — the request is clear and implementation-ready; no blocking
+  clarification is needed.
+- **READY WITH ASSUMPTIONS** — the request is usable if its tagged assumptions
+  are confirmed; assumptions are surfaced for confirmation before work begins.
+- **NEEDS CLARIFICATION** — missing or ambiguous information materially affects
+  implementation; the prioritized questions must be answered before the request
+  enters a workflow.
 
-## Readiness gate
+## Output markers
 
-A request is READY_FOR_WORKFLOW only when all of the following hold:
+- `[CLARIFICATION REQUIRED]` — information is missing or ambiguous in a way that
+  materially affects implementation.
+- `[ASSUMPTION — REQUIRES CONFIRMATION]` — an inferred fact the user has not
+  confirmed. Assumptions are never presented as requirements, and
+  contradictions are surfaced for the user rather than silently resolved.
 
-- Intent and objective are unambiguous.
-- No blocking unknowns remain.
-- Every contradiction is resolved or explicitly accepted by the user.
-- Scope is bounded (stated in/out of scope, or the request is single-purpose).
-- Provisional, testable acceptance criteria exist and the user can confirm them.
-- A concrete existing workflow can be recommended.
-- The request is not safety-incompatible.
+## Methodology
 
-## Evidence taxonomy
-
-Every claim is labeled: USER REQUIREMENT (stated by the user), REPOSITORY FACT
-(verified by repository inspection, with a file/line citation), CONFIRMED FACT
-(verified against an authoritative source), INFERRED ASSUMPTION (unconfirmed,
-surfaced for user agreement), UNKNOWN (blocking or non-blocking), or
-REQUIRES RESEARCH (deferred to the RESEARCH step). Assumptions are never
-converted into facts, and contradictions are never silently resolved.
-
-## Clarification strategy
-
-Questions are minimal, specific, and grouped into blocking and optional. The
-corrector does not ask what the repository or existing documentation can
-answer, and does not ask preference questions where the repository already
-establishes the answer. Optional questions carry a proposed default so the user
-may answer none and still proceed.
+The correction methodology is defined by the `prompt-corrector` skill in ten
+steps: understand intent; extract explicit requirements; identify missing
+requirements; detect ambiguity; detect contradictions; identify assumptions;
+determine clarifications; produce the corrected prompt; define acceptance
+criteria; and assess readiness. Irrelevant requirement categories are not
+forced onto small requests.
 
 ## Components
 
 | Component | Path | Role |
 | --- | --- | --- |
 | Agent | `.opencode/agents/prompt-corrector.md` | Authoritative (read-only) role definition |
-| Command | `.opencode/commands/correct.md` | User-facing entry point |
-| Skill | `.opencode/skills/prompt-corrector/SKILL.md` | Correction method and readiness gate |
-| Template | `templates/corrected-prompt.md` | Canonical output structure |
+| Command | `.opencode/commands/correct.md` | User-facing entry point (`/correct <user request>`) |
+| Skill | `.opencode/skills/prompt-corrector/SKILL.md` | Correction methodology and readiness assessment |
+| Template | `templates/corrected-prompt.md` | Canonical corrected prompt structure |
 
 ## Integration
 
 The `correct` command is intended to be run before starting an engineering
 workflow. `workflows/new-project.md` and `workflows/feature-development.md`
-require the request to pass the corrector's gate (or to have blocking
-clarification resolved) before their requirement steps proceed. The guardrail
-is also stated in `rules/core.md`. The other workflows are not modified; the
-corrector is not embedded into every workflow.
+expect the request to be READY or READY WITH ASSUMPTIONS (or to have blocking
+NEEDS CLARIFICATION questions resolved) before their requirement steps proceed.
+The ready-before-workflow guardrail is also stated in `rules/core.md`. The other
+workflows are not modified; the corrector is not embedded into every workflow,
+and prompt correction is not mandatory.
 
 ## Relation to existing content
 
 - The `requirements-analysis` skill covers detailed requirement gathering
   inside a workflow; the `prompt-corrector` skill does not restate it.
 - The `analyze` command performs deeper codebase impact analysis; the corrector
-  only labels repository facts and detects contradictions.
+  only prepares the request.
 - The output follows `templates/corrected-prompt.md` and its vocabulary aligns
   with `templates/requirements.md` to avoid duplicated artifacts.
 
 ## Verification
 
-Authenticate this documentation against the actual framework: the corrector is
-read-only, gated as READY_FOR_WORKFLOW / NEEDS_CLARIFICATION / INVALID_REQUEST,
-and never invents requirements, technologies, APIs, or project behavior.
+Verify this documentation against the actual framework: the corrector is
+read-only, gated as READY / READY WITH ASSUMPTIONS / NEEDS CLARIFICATION, uses
+the `[CLARIFICATION REQUIRED]` and `[ASSUMPTION — REQUIRES CONFIRMATION]`
+markers, and never invents requirements, technologies, APIs, libraries,
+project behavior, or missing information.

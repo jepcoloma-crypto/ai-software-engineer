@@ -156,6 +156,32 @@ validation gates, and approval requirements for that type of change.
 8. Respect the human approval points defined in the workflow and in
    `AGENTS.md` before proceeding with high-impact or destructive steps.
 
+## Prompt Correction (`/correct`)
+
+Before starting an engineering workflow, you may run:
+
+`/correct <user request>`
+
+The Prompt Corrector returns a structured corrected prompt built from
+`templates/corrected-prompt.md` — the understood intent, desired outcome,
+context, users and actors, explicit, functional, and non-functional
+requirements, business rules, data, integrations, security, reporting and
+audit requirements, technical constraints, assumptions, clarifications
+required, out-of-scope items, and proposed acceptance criteria — plus an
+implementation readiness assessment:
+
+- **READY** — the request is clear and implementation-ready.
+- **READY WITH ASSUMPTIONS** — the request is usable if its tagged assumptions
+  are confirmed.
+- **NEEDS CLARIFICATION** — missing or ambiguous information must be answered
+  before the request enters a workflow.
+
+The Prompt Corrector is a **recommended pre-workflow gateway**, not a mandatory
+first step. It is read-only and never implements anything. Use it when a request
+is unclear, incomplete, ambiguous, contradictory, or poorly structured;
+well-specified requests may proceed directly through the normal framework entry
+points.
+
 ## Safely Inspecting and Validating Framework Changes
 
 The framework itself is subject to its own principles, especially

@@ -124,3 +124,22 @@ Workflows are the orchestration point of the framework. Each workflow:
 The result is that the same agents, skills, and rules are reused consistently
 across task types, with the workflow defining the sequence, gates, and
 approval boundaries.
+
+## Prompt Correction and the Workflows
+
+The Prompt Corrector (`correct` command, `.opencode/agents/prompt-corrector.md`)
+is a recommended pre-workflow gateway that improves a raw user request before
+it enters any workflow. It is separate from workflow execution: it does not run
+a workflow, delegate to workflow agents, or change the phase sequence of the
+workflows above.
+
+- A **READY** or **READY WITH ASSUMPTIONS** corrected prompt flows into the
+  workflow that matches the request type — for example, `feature-development.md`
+  for a new capability in an existing system, `new-project.md` for greenfield
+  work, or `bug-fix.md` for a reported defect.
+- A **NEEDS CLARIFICATION** result stops before a workflow starts until the
+  prioritized clarifications are answered.
+- The corrected prompt feeds the workflow's requirement phase; the workflow
+  still owns its own agents, validation gates, and human approval points.
+- Prompt correction is recommended, not mandatory. A well-specified request may
+  begin a workflow directly without running `correct`.
