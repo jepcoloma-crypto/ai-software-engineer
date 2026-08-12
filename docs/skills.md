@@ -16,6 +16,12 @@ Used when gathering and refining requirements for a feature or system: functiona
 and non-functional requirements, acceptance criteria, constraints, assumptions,
 and ambiguity detection before design or implementation begins.
 
+### prompt-corrector
+Used to transform a raw, imperfect user request into a clear, structured,
+verifiable engineering request before an engineering workflow begins: request
+classification, intent extraction, evidence labeling, ambiguity, contradiction
+and scope detection, clarification, and readiness decisions.
+
 ### system-architecture
 Used when designing or reviewing a system's high-level structure: architecture
 styles, module boundaries, system components, scalability, reliability, security

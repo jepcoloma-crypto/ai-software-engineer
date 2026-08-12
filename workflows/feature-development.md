@@ -20,6 +20,8 @@ change (`refactoring.md`), or releases (`deployment.md`).
 
 - The project exists and its conventions are discoverable.
 - The feature request states the goal and the problem it solves.
+- The request has passed the Prompt Corrector gate (`correct` command): it is
+  READY_FOR_WORKFLOW or any blocking clarification is resolved.
 - The affected surface (modules, endpoints, data, UI) is identifiable.
 - The relevant subsystems have been inspected before coding begins.
 
@@ -28,8 +30,10 @@ change (`refactoring.md`), or releases (`deployment.md`).
 1. **Understand the request** — **Lead agent.**
    Restate the goal, gather functional and non-functional requirements,
    identify constraints and assumptions, and write testable acceptance
-   criteria. Use the `requirements-analysis` skill and `rules/core.md`. If
-   requirements are unclear, ask before continuing.
+   criteria. Use the `requirements-analysis` skill and `rules/core.md`. If the
+   request has not already been corrected, run the `correct` command first; do
+   not proceed while the request is NEEDS_CLARIFICATION. If requirements are
+   unclear, ask before continuing.
 2. **Analyze the change** — **Architect agent.**
    Identify how the feature fits the existing architecture. Determine the
    impacted modules, data model, API surface, and user flows. Record the

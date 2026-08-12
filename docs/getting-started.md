@@ -18,8 +18,8 @@ The framework is composed of reusable guidance and structure:
 - **Templates** — reusable artifact starting points under `templates/`.
 - **Knowledge** — domain reference material under `knowledge/`.
 - **Commands** — OpenCode project commands under `.opencode/commands/`:
-  `research`, `analyze`, `architect`, `plan`, `build`, `test`, `review`,
-  `security`, `debug`, and `document`.
+  `correct`, `research`, `analyze`, `architect`, `plan`, `build`, `test`,
+  `review`, `security`, `debug`, and `document`.
 - **Documentation** — guidance and decisions under `docs/`, plus
   `README.md` and `CONTRIBUTING.md`.
 
@@ -59,9 +59,9 @@ that risk by encoding senior engineering discipline as repeatable structure:
 | `rules/` | Enforceable engineering and safety rules (core, architecture, api, database, coding, frontend, security, testing, documentation, git). |
 | `templates/` | Reusable starting points for common artifacts (requirements, decision, architecture, implementation plan, testing, research, security review, project summary). |
 | `workflows/` | Repeatable procedures for recurring task types (new project, feature, bug fix, refactoring, database change, API change, security review, deployment). |
-| `.opencode/agents/` | Definitions of the nine specialized agents. |
+| `.opencode/agents/` | Definitions of the ten specialized agents. |
 | `.opencode/skills/` | Specialized skill definitions, one folder per skill. |
-| `.opencode/commands/` | OpenCode project commands exposing the framework workflows: `research`, `analyze`, `architect`, `plan`, `build`, `test`, `review`, `security`, `debug`, and `document`. |
+| `.opencode/commands/` | OpenCode project commands exposing the framework workflows: `correct`, `research`, `analyze`, `architect`, `plan`, `build`, `test`, `review`, `security`, `debug`, and `document`. |
 | `README.md` | Short project overview and layout. |
 | `CONTRIBUTING.md` | Guidelines for improving the framework itself. |
 | `LICENSE` | MIT License. |
@@ -104,13 +104,14 @@ Rules, workflows, skills, and agents are all meant to be consistent with it.
 - **Knowledge** supplies reusable reference material that research can promote
   into verified guidance.
 - **Commands** are OpenCode project commands under `.opencode/commands/` that
-  expose the framework workflows: `research`, `analyze`, `architect`, `plan`,
-  `build`, `test`, `review`, `security`, `debug`, and `document`.
+  expose the framework workflows: `correct`, `research`, `analyze`, `architect`,
+  `plan`, `build`, `test`, `review`, `security`, `debug`, and `document`.
 
 ## Basic Usage Flow
 
 For a significant task, the flow follows the Development Lifecycle in
-`AGENTS.md`:
+`AGENTS.md`. Before the workflow begins, run the `correct` command so the
+Prompt Corrector normalizes the request and confirms it is ready:
 
 1. **Requirements** — restate the goal, gather functional and non-functional
    requirements, record constraints and assumptions, define acceptance
@@ -141,9 +142,10 @@ validation gates, and approval requirements for that type of change.
    instruction file, and the agent and skill definitions under `.opencode/`
    are available to the session.
 3. Read `AGENTS.md` before any task.
-4. For a task, identify the matching workflow in `workflows/` (for example,
-   `feature-development.md` for a new capability in an existing system) and
-   follow it.
+4. Run the `correct` command to normalize the request into a verified
+   engineering prompt, then identify the matching workflow in `workflows/`
+   (for example, `feature-development.md` for a new capability in an existing
+   system) and follow it.
 5. Delegate specialized work to the appropriate agent defined in
    `.opencode/agents/` (for example, the Architect agent for design, the
    Developer agent for implementation, the Reviewer agent for review).

@@ -1,12 +1,12 @@
 ﻿# Agents
 
-This document catalogs the nine agents defined in .opencode/agents/.
+This document catalogs the ten agents defined in .opencode/agents/.
 
 The files under .opencode/agents/ are the **authoritative agent definitions**.
 This document is summary-only and must not duplicate their full instructions.
 When an agent definition changes, update its authoritative file first.
 
-All nine agents are subagents. The lead agent (the main session) coordinates
+All ten agents are subagents. The lead agent (the main session) coordinates
 workflows, delegates specialized tasks, holds final sign-off, and confirms
 completion.
 
@@ -19,6 +19,7 @@ completion.
 | debugger      | Can edit     |
 | database      | Can edit     |
 | documentation | Can edit     |
+| prompt-corrector | Cannot edit  |
 | researcher    | Cannot edit  |
 | architect     | Cannot edit  |
 | reviewer      | Cannot edit  |
@@ -28,6 +29,23 @@ Permission settings are defined in each authoritative agent file.
 
 ---
 ## Agent Catalog
+
+### prompt-corrector
+
+Transforms an imperfect user request into a clear, structured, verifiable
+engineering request before the engineering workflow begins. Classifies the
+request, determines intent, extracts requirements, labels evidence, detects
+ambiguity, missing information, contradictions, and scope problems, generates
+clarification questions, and decides whether the request is ready for a
+workflow.
+
+**Typical use:** Normalizing a raw user request, detecting missing or
+contradictory information, generating targeted clarification questions, and
+gating entry to an engineering workflow.
+
+**Authoritative definition:** .opencode/agents/prompt-corrector.md
+
+---
 
 ### researcher
 

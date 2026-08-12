@@ -18,6 +18,9 @@ it is a set of reusable guidance, rules, knowledge, templates, and workflows.
 - **Development Lifecycle** — a repeatable process from `REQUIREMENTS` through
   `COMPLETE` (running `RESEARCH → ANALYSIS → ARCHITECTURE → PLAN → IMPLEMENT →
   TEST → REVIEW → SECURITY REVIEW → DOCUMENT` in between).
+- **Prompt Corrector** — a read-only gateway (`correct` command) that turns
+  raw, imperfect requests into clear, structured, verifiable engineering
+  requests before an engineering workflow begins.
 - **Rules** — enforceable guardrails for safety, change management, and
   engineering quality (`rules/`).
 - **Knowledge** — reference material, research, and lessons learned organized

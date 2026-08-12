@@ -138,9 +138,9 @@ proposed improvement until a human approves the change.
 
 The command layer is the user-facing orchestration interface. It exposes the
 framework workflows through OpenCode project commands located under
-`.opencode/commands/` (`research`, `analyze`, `architect`, `plan`, `build`,
-`test`, `review`, `security`, `debug`, `document`), and connects user requests
-to the appropriate agents, skills, rules, workflows, and templates.
+`.opencode/commands/` (`correct`, `research`, `analyze`, `architect`, `plan`,
+`build`, `test`, `review`, `security`, `debug`, `document`), and connects user
+requests to the appropriate agents, skills, rules, workflows, and templates.
 
 ## Documentation Layer (`docs/`, `README.md`, `CONTRIBUTING.md`, `LICENSE`)
 
